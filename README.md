@@ -113,6 +113,35 @@ php artisan db:seed --class=DemoSeeder
 
 ```
 
+### Now run the server. Type these commands on seperate terminal. Don't close any of the terminal to avoid issues.
+
+```bash
+# Terminal 1
+php artisan serve
+
+ INFO  Server running on [http://127.0.0.1:8000].
+
+  Press Ctrl+C to stop the server
+
+# Terminal 2
+npm run dev
+
+> dev
+> vite
+
+
+  VITE v7.3.0  ready in 477 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+  LARAVEL v12.42.0  plugin v2.0.1
+
+  ➜  APP_URL: http://localhost
+
+```
+
 ---
 
 ## Demo Credentials
