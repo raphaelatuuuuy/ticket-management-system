@@ -68,7 +68,7 @@ The application showcases:
 ### Cloning the Project
 
 ```bash
-git clone https://github.com/your-username/ticket-management-system.git
+git clone https://github.com/raphaelatuuuuy/ticket-management-system.git
 cd ticket-management-system
 ```
 
