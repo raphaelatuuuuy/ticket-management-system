@@ -22,7 +22,7 @@
                         <option value="">All Assignees</option>
                         <option value="unassigned">Unassigned</option>
                         @foreach($agents as $agent)
-                            <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                            <option value="{{ $agent->id }}">{{ $agent->name }} ({{ ucfirst($agent->role) }})</option>
                         @endforeach
                     </select>
                 </div>
@@ -532,24 +532,6 @@
                 alert('Error restoring ticket. Please try again.');
             });
         }
-
-        // Auto-open ticket detail panel if ticket_id is in URL
-        window.addEventListener('load', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const ticketId = urlParams.get('ticket_id');
-            
-            if (ticketId) {
-                console.log('Auto-opening ticket:', ticketId);
-                // Longer delay to ensure all scripts are loaded
-                setTimeout(() => {
-                    if (typeof openTicketDetail === 'function') {
-                        openTicketDetail(ticketId);
-                    } else {
-                        console.error('openTicketDetail function not found');
-                    }
-                }, 500);
-            }
-        });
     </script>
 
 </x-app-layout>

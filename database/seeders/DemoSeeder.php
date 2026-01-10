@@ -269,7 +269,7 @@ class DemoSeeder extends Seeder
 
         // Ticket 10: Open - Filipino Formal
         $ticket10 = Ticket::create([
-            'ticket_number' => 'PH202603',
+            'ticket_number' => '3202603',
             'title' => 'Hindi naglo-load ang Facebook',
             'description' => 'Magandang araw. Napansin ko po na hindi naglo-load ang Facebook sa opisina. Mayroon po bang restriction sa network? Kailangan ko po ito para sa opisyal na komunikasyon.',
             'status_id' => $statusOpen->id,

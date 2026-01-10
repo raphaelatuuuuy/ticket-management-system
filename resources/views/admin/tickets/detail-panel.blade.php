@@ -1,7 +1,7 @@
 <!-- Ticket Detail Slide-over Panel -->
 <div id="ticketDetailOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="closeTicketDetail()"></div>
 
-<div id="ticketDetailPanel" class="fixed inset-y-0 right-0 bg-white shadow-xl z-50 transform translate-x-full transition-all duration-300 ease-in-out" style="width: 50%; min-width: 400px; max-width: 100%;">
+<div id="ticketDetailPanel" class="fixed inset-y-0 right-0 bg-white shadow-xl z-50 transform translate-x-full transition-all duration-300 ease-in-out" style="width: 75%; min-width: 25vw; max-width: 100%;">
     <!-- Resize Handle -->
     <div id="resizeHandle" class="absolute left-0 top-0 bottom-0 w-1 bg-gray-300 hover:bg-indigo-500 cursor-ew-resize transition-colors"></div>
     
@@ -236,7 +236,7 @@
         if (!isResizing) return;
 
         const offsetRight = document.body.offsetWidth - e.clientX;
-        const minWidth = 400;
+        const minWidth = Math.floor(window.innerWidth * 0.25);
         const maxWidth = window.innerWidth * 0.95; // Max 95% for near full-screen capability
 
         if (offsetRight >= minWidth && offsetRight <= maxWidth) {
@@ -467,22 +467,24 @@
         const isClosed = ticket.status && ticket.status.toLowerCase() === 'closed';
         
         if (isClosed) {
-            // Show closed ticket notice with reopen button for admin
+            // Compact closed ticket notice with inline actions for admin
             replySection.innerHTML = `
-                <div class="bg-gray-100 border border-gray-300 rounded-md p-4 text-center">
-                    <p class="text-gray-700 font-medium mb-3">
-                        <svg class="w-5 h-5 inline mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="border-t border-gray-200 bg-white py-2 px-3 flex items-center justify-between gap-3 max-h-20">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <svg class="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
-                        Ticket is closed. No further actions allowed.
-                    </p>
-                    <button onclick="reopenTicket(${ticket.id})" 
-                            class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                        <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-                        </svg>
-                        Reopen Ticket
-                    </button>
+                        <div class="min-w-0">
+                            <p class="text-sm font-semibold text-gray-900 truncate">Ticket is closed.</p>
+                            <p class="text-xs text-gray-500 truncate">Still have concerns? You can request to reopen.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="reopenTicket(${ticket.id})" 
+                                class="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            Reopen
+                        </button>
+                    </div>
                 </div>
             `;
         } else {

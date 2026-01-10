@@ -1,7 +1,7 @@
 <!-- Ticket Detail Slide-over Panel -->
 <div id="ticketDetailOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="closeTicketDetail()"></div>
 
-<div id="ticketDetailPanel" class="fixed inset-y-0 right-0 bg-white shadow-xl z-50 transform translate-x-full transition-all duration-300 ease-in-out" style="width: 50%; min-width: 400px; max-width: 100%;">
+<div id="ticketDetailPanel" class="fixed inset-y-0 right-0 bg-white shadow-xl z-50 transform translate-x-full transition-all duration-300 ease-in-out" style="width: 75%; min-width: 25vw; max-width: 100%;">
     <!-- Resize Handle -->
     <div id="resizeHandle" class="absolute left-0 top-0 bottom-0 w-1 bg-gray-300 hover:bg-indigo-500 cursor-ew-resize transition-colors"></div>
     
@@ -201,7 +201,7 @@
         if (!isResizing) return;
 
         const offsetRight = document.body.offsetWidth - e.clientX;
-        const minWidth = 400;
+        const minWidth = Math.floor(window.innerWidth * 0.25);
         const maxWidth = window.innerWidth * 0.95; // Max 95% for near full-screen capability
 
         if (offsetRight >= minWidth && offsetRight <= maxWidth) {
