@@ -368,7 +368,7 @@ class DemoSeeder extends Seeder
         // Sample attachment paths (these would be actual image files)
         $attachmentImages = [
             ['name' => 'flowers.jpg', 'path' => 'storage/app/ticket_attachments/flowers.jpg', 'mime' => 'image/jpeg'],
-            ['name' => 'laptop.png', 'path' => 'storage/app/ticket_attachments/laptop.png', 'mime' => 'image/png'],
+            ['name' => 'laptop.jpg', 'path' => 'storage/app/ticket_attachments/laptop.png', 'mime' => 'image/png'],
             ['name' => 'working.jpg', 'path' => 'storage/app/ticket_attachments/working.jpg', 'mime' => 'image/jpeg'],
             ['name' => 'hammer.jpg', 'path' => 'storage/app/ticket_attachments/hammer.jpg', 'mime' => 'image/jpeg'],
         ];
