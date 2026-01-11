@@ -230,7 +230,7 @@
                                 <div class="flex items-center justify-between">
                                     <div class="flex-1">
                                         <a href="{{ route('agent.tickets.index', ['filter' => 'my_escalations']) }}" class="text-sm font-semibold text-gray-900 hover:text-indigo-600">
-                                            #{{ $escalation->ticket->ticket_number }} - {{ Str::limit($escalation->ticket->title, 35) }}
+                                            #{{ optional($escalation->ticket)->ticket_number ?? 'N/A' }} - {{ Str::limit(optional($escalation->ticket)->title ?? 'Ticket removed', 35) }}
                                         </a>
                                         <p class="text-xs text-gray-600 mt-1">
                                             Status: Pending | 
@@ -266,10 +266,10 @@
                     <div class="border-l-4 border-orange-500 bg-orange-50 rounded-lg p-4">
                         <div class="flex items-center justify-between">
                             <div class="flex-1">
-                                <h4 class="font-semibold text-gray-900">#{{ $escalation->ticket->ticket_number }} - {{ $escalation->ticket->title }}</h4>
+                                <h4 class="font-semibold text-gray-900">#{{ optional($escalation->ticket)->ticket_number ?? 'N/A' }} - {{ optional($escalation->ticket)->title ?? 'Ticket removed' }}</h4>
                                 <p class="text-sm text-gray-600 mt-1">
-                                    Customer: {{ $escalation->ticket->user->name ?? 'Unknown' }} | 
-                                    Priority: {{ $escalation->ticket->priority_relation->description ?? 'No Priority Set' }} | 
+                                    Customer: {{ optional(optional($escalation->ticket)->user)->name ?? 'Unknown' }} | 
+                                    Priority: {{ optional(optional($escalation->ticket)->priority_relation)->description ?? 'No Priority Set' }} | 
                                     Requested: {{ $escalation->requested_at ? $escalation->requested_at->diffForHumans() : 'Unknown' }}
                                 </p>
                                 <p class="text-sm text-gray-500 mt-1">{{ Str::limit($escalation->reason, 100) }}</p>
@@ -306,10 +306,10 @@
                     <div class="border-l-4 border-blue-500 bg-blue-50 rounded-lg p-4">
                         <div class="flex items-center justify-between">
                             <div class="flex-1">
-                                <h4 class="font-semibold text-gray-900">#{{ $escalation->ticket->ticket_number }} - {{ $escalation->ticket->title }}</h4>
+                                <h4 class="font-semibold text-gray-900">#{{ optional($escalation->ticket)->ticket_number ?? 'N/A' }} - {{ optional($escalation->ticket)->title ?? 'Ticket removed' }}</h4>
                                 <p class="text-sm text-gray-600 mt-1">
-                                    Customer: {{ $escalation->ticket->user->name ?? 'Unknown' }} | 
-                                    Priority: {{ $escalation->ticket->priority_relation->description ?? 'No Priority Set' }} | 
+                                    Customer: {{ optional(optional($escalation->ticket)->user)->name ?? 'Unknown' }} | 
+                                    Priority: {{ optional(optional($escalation->ticket)->priority_relation)->description ?? 'No Priority Set' }} | 
                                     Approved: {{ $escalation->escalated_at ? $escalation->escalated_at->diffForHumans() : 'Pending' }}
                                 </p>
                                 <p class="text-sm text-gray-500 mt-1">{{ Str::limit($escalation->reason, 100) }}</p>
@@ -346,10 +346,10 @@
                     <div class="border-l-4 border-purple-500 bg-purple-50 rounded-lg p-4">
                         <div class="flex items-center justify-between">
                             <div class="flex-1">
-                                <h4 class="font-semibold text-gray-900">#{{ $reopenRequest->ticket->ticket_number }} - {{ $reopenRequest->ticket->title }}</h4>
+                                <h4 class="font-semibold text-gray-900">#{{ optional($reopenRequest->ticket)->ticket_number ?? 'N/A' }} - {{ optional($reopenRequest->ticket)->title ?? 'Ticket removed' }}</h4>
                                 <p class="text-sm text-gray-600 mt-1">
-                                    Customer: {{ $reopenRequest->ticket->user->name ?? 'Unknown' }} |
-                                    Priority: {{ $reopenRequest->ticket->priority_relation->description ?? 'No Priority Set' }} |
+                                    Customer: {{ optional(optional($reopenRequest->ticket)->user)->name ?? 'Unknown' }} |
+                                    Priority: {{ optional(optional($reopenRequest->ticket)->priority_relation)->description ?? 'No Priority Set' }} |
                                     Status: <span class="capitalize {{ $reopenRequest->status === 'pending' ? 'text-orange-600' : ($reopenRequest->status === 'accepted' ? 'text-green-600' : 'text-red-600') }}">{{ $reopenRequest->status }}</span> |
                                     Requested: {{ $reopenRequest->requested_at ? $reopenRequest->requested_at->diffForHumans() : 'Unknown' }}
                                 </p>
