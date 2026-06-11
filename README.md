@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is a Laravel-based Ticket Management System for customer support, built for COMP 016. It demonstrates CRUD, RBAC, escalations, attachments, and more.
+This is a Laravel-based Ticket Management System for customer support, built for COMP 019. It demonstrates CRUD, RBAC, escalations, attachments, and more.
 
 The application showcases:
 
@@ -28,8 +28,8 @@ The application showcases:
 
 ## Course Information
 
-**Course Code:** COMP 016 - Web Development  
-**Project Type:** Final Project - Web Development  
+**Course Code:** COMP 019 - ADET
+**Project Type:** Final Project - ADET
 **Framework:** Laravel 12  
 **PHP Version:** 8.2+  
 **Database:** MySQL
