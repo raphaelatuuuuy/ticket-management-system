@@ -1,0 +1,40 @@
+{
+    "$schema": "https://railway.app/railway.schema.json",
+    "name": "tandem",
+    "services": [
+        {
+            "name": "app",
+            "builder": {
+                "type": "nixpacks",
+                "nixpacks": {
+                    "php": {
+                        "version": "8.2"
+                    },
+                    "node": {
+                        "version": "20"
+                    }
+                }
+            },
+            "buildCommand": "composer install --no-dev --optimize-autoloader && npm install && npm run build && php artisan config:cache && php artisan view:cache && php artisan migrate --force",
+            "startCommand": "php artisan serve --host=0.0.0.0 --port=$PORT"
+        },
+        {
+            "name": "worker",
+            "builder": {
+                "type": "nixpacks",
+                "nixpacks": {
+                    "php": {
+                        "version": "8.2"
+                    }
+                }
+            },
+            "startCommand": "php artisan queue:work --tries=3"
+        },
+        {
+            "name": "mysql",
+            "builder": {
+                "type": "mysql"
+            }
+        }
+    ]
+}
