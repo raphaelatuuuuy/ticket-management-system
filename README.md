@@ -1,4 +1,6 @@
-# Ticket Management System
+# Tandem: Ticket Management System
+
+<img width="296" height="285" alt="logo" src="https://github.com/user-attachments/assets/20931138-9812-43e5-ad33-e8b3d4d4f0cd" />
 
 ## Project Overview
 
