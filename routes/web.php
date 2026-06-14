@@ -46,8 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/tickets/{id}/reopen-requests/{reopenRequestId}/respond', [TicketController::class, 'respondToReopenRequest'])->name('tickets.respondToReopenRequest');
 });
 
-// Admin routes - role check done in controllers
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+// Admin routes - protected by role middleware
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     
     // User Management
@@ -85,8 +85,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/tickets/{id}/restore', [AdminTicketController::class, 'restore'])->name('tickets.restore');
 });
 
-// Manager routes - role check done in controllers
-Route::middleware(['auth'])->prefix('manager')->name('manager.')->group(function () {
+// Manager routes - protected by role middleware
+Route::middleware(['auth', 'role:manager'])->prefix('manager')->name('manager.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Manager\DashboardController::class, 'index'])->name('dashboard');
     
     Route::get('/tickets', [ManagerTicketController::class, 'index'])->name('tickets.index');
@@ -101,8 +101,8 @@ Route::middleware(['auth'])->prefix('manager')->name('manager.')->group(function
     Route::post('/tickets/{id}/reopen-request/{reopenRequestId}/{action}', [ManagerTicketController::class, 'handleReopenRequest'])->name('tickets.handleReopenRequest');
 });
 
-// Agent routes - role check done in controllers
-Route::middleware(['auth'])->prefix('agent')->name('agent.')->group(function () {
+// Agent routes - protected by role middleware
+Route::middleware(['auth', 'role:agent'])->prefix('agent')->name('agent.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Agent\DashboardController::class, 'index'])->name('dashboard');
     
     Route::get('/tickets', [AgentTicketController::class, 'index'])->name('tickets.index');

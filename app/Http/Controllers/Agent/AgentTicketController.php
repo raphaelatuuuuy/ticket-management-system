@@ -156,7 +156,7 @@ class AgentTicketController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error processing reopen request: ' . $e->getMessage()
+                'message' => 'Error processing reopen request. Please try again.'
             ], 500);
         }
     }
@@ -211,8 +211,7 @@ class AgentTicketController extends Controller
             
             return response()->json([
                 'success' => false,
-                'message' => 'Error verifying ticket: ' . $e->getMessage(),
-                'error_details' => config('app.debug') ? $e->getTraceAsString() : null
+                'message' => 'Error verifying ticket. Please try again.'
             ], 500);
         }
     }
@@ -305,7 +304,7 @@ class AgentTicketController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error requesting re-escalation: ' . $e->getMessage()
+                'message' => 'Error requesting re-escalation. Please try again.'
             ], 500);
         }
     }
@@ -360,7 +359,7 @@ class AgentTicketController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error submitting reopen request: ' . $e->getMessage()
+                'message' => 'Error submitting reopen request. Please try again.'
             ], 500);
         }
     }

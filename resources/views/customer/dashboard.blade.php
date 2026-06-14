@@ -834,6 +834,8 @@
             return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
 
+        function escapeHtml(str) { if (!str) return ''; const div = document.createElement('div'); div.appendChild(document.createTextNode(str)); return div.innerHTML; }
+
         function createMessageBubble({ author, content, date, isCurrentUser, attachments, userRole }) {
             const alignClass = isCurrentUser ? 'justify-end' : 'justify-start';
             const bubbleClass = isCurrentUser ? 'bg-indigo-600 text-white' : 'bg-white text-gray-900 border border-gray-200';
@@ -866,9 +868,9 @@
             return `
                 <div class="flex ${alignClass}">
                     <div class="max-w-md">
-                        <p class="text-xs text-gray-500 mb-1 ${authorClass}">${rolePrefix}${author} • ${date}</p>
+                        <p class="text-xs text-gray-500 mb-1 ${authorClass}">${rolePrefix}${escapeHtml(author)} • ${escapeHtml(date)}</p>
                         <div class="${bubbleClass} rounded-lg px-4 py-3 shadow-sm">
-                            ${showMessage ? `<p class="text-sm whitespace-pre-wrap">${content}</p>` : ''}
+                            ${showMessage ? `<p class="text-sm whitespace-pre-wrap">${escapeHtml(content)}</p>` : ''}
                             ${attachmentsHtml}
                         </div>
                     </div>

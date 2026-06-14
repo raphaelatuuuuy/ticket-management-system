@@ -154,7 +154,7 @@ class ManagerTicketController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error reopening ticket: ' . $e->getMessage()
+                'message' => 'Error reopening ticket. Please try again.'
             ], 500);
         }
     }
@@ -223,7 +223,7 @@ class ManagerTicketController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error processing reopen request: ' . $e->getMessage()
+                'message' => 'Error processing reopen request. Please try again.'
             ], 500);
         }
     }
@@ -256,7 +256,7 @@ class ManagerTicketController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error assigning escalation: ' . $e->getMessage()
+                'message' => 'Error assigning escalation. Please try again.'
             ], 500);
         }
     }
@@ -312,7 +312,7 @@ class ManagerTicketController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error escalating ticket: ' . $e->getMessage()
+                'message' => 'Error escalating ticket. Please try again.'
             ], 500);
         }
     }
@@ -379,7 +379,7 @@ class ManagerTicketController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error resolving escalation: ' . $e->getMessage()
+                'message' => 'Error resolving escalation. Please try again.'
             ], 500);
         }
     }
@@ -434,7 +434,7 @@ class ManagerTicketController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error rejecting escalation: ' . $e->getMessage()
+                'message' => 'Error rejecting escalation. Please try again.'
             ], 500);
         }
     }

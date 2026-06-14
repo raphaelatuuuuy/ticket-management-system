@@ -1,4 +1,9 @@
 <x-guest-layout>
+    <div class="text-center mt-4 mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">{{ __('Create Account') }}</h2>
+        <p class="mt-2 text-gray-600">{{ __('Fill in the details below to get started.') }}</p>
+    </div>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

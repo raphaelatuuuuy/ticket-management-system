@@ -5,7 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Tandem</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,9 +19,9 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
+            <div class="flex justify-center">
                 <a href="/">
-                    <x-application-logo class="w-32 max-h-24 h-auto object-contain" />
+                    <img src="{{ asset('images/logo-withname.png') }}" alt="{{ config('app.name') }}" class="w-80 h-auto object-contain" />
                 </a>
             </div>
 

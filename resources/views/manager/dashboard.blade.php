@@ -257,7 +257,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <h4 class="text-lg font-semibold text-gray-900 mb-4">Pending Escalations</h4>
-                        <div class="space-y-3">
+                        <div class="space-y-5">
                             @forelse($pendingEscalationsList as $escalation)
                             <div class="border-l-4 border-orange-500 pl-3 py-2 bg-orange-50">
                                 <div class="flex items-center justify-between">
@@ -266,8 +266,11 @@
                                             #{{ $escalation->ticket->ticket_number }} - {{ Str::limit($escalation->ticket->title, 35) }}
                                         </a>
                                         <p class="text-xs text-gray-600 mt-1">
-                                            Requested by: {{ $escalation->requestedBy->name }} | 
-                                            {{ $escalation->requested_at->diffForHumans() }}
+                                            Customer: {{ $escalation->ticket->user->name ?? 'N/A' }} |
+                                            Assigned to: {{ $escalation->ticket->assignedTo->name ?? 'Unassigned' }} |
+                                            Requested by: {{ $escalation->requestedBy->name }} |
+                                            Priority: {{ $escalation->ticket->priority_relation->description ?? 'N/A' }} |
+                                            Requested: {{ $escalation->requested_at->diffForHumans() }}
                                         </p>
                                     </div>
                                 </div>
@@ -283,7 +286,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
                         <h4 class="text-lg font-semibold text-gray-900 mb-4">Pending Reopen Requests</h4>
-                        <div class="space-y-3">
+                        <div class="space-y-5">
                             @forelse($pendingReopenRequestsList as $request)
                             <div class="border-l-4 border-purple-500 pl-3 py-2 bg-purple-50">
                                 <div class="flex items-center justify-between">

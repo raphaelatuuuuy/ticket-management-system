@@ -64,7 +64,7 @@ class TicketController extends Controller
             return redirect()->route('dashboard')->with('success', 'Ticket submitted successfully!');
         } catch (\Exception $e) {
             Log::error('Ticket creation error: ' . $e->getMessage());
-            return back()->with('error', 'Failed to submit ticket. Error: ' . $e->getMessage());
+            return back()->with('error', 'Failed to submit ticket. Please try again.');
         }
     }
 
@@ -216,7 +216,7 @@ class TicketController extends Controller
             return response()->json($response);
         } catch (\Exception $e) {
             Log::error('Ticket show error: ' . $e->getMessage());
-            return response()->json(['error' => 'Failed to load ticket details: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to load ticket details.'], 500);
         }
     }
 
@@ -288,7 +288,7 @@ class TicketController extends Controller
             ]);
         } catch (\Exception $e) {
             Log::error('Ticket reply error: ' . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Error sending reply: ' . $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => 'Error sending reply. Please try again.'], 500);
         }
     }
 
@@ -321,7 +321,7 @@ class TicketController extends Controller
             ]);
         } catch (\Exception $e) {
             Log::error('Status update error: ' . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Error updating status: ' . $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => 'Error updating status. Please try again.'], 500);
         }
     }
 
@@ -349,16 +349,42 @@ class TicketController extends Controller
             ]);
         } catch (\Exception $e) {
             Log::error('Assign agent error: ' . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Error assigning ticket: ' . $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => 'Error assigning ticket. Please try again.'], 500);
         }
     }
 
     public function downloadAttachment($path)
     {
+        $path = str_replace('..', '', $path);
+        $path = ltrim($path, '/');
         $fullPath = storage_path('app/public/' . $path);
-        
+        $realPath = realpath($fullPath);
+        $allowedDir = realpath(storage_path('app/public'));
+
+        if (!$realPath || !$allowedDir || strpos($realPath, $allowedDir) !== 0) {
+            abort(404);
+        }
+
         if (!file_exists($fullPath)) {
             abort(404);
+        }
+
+        $attachment = \App\Models\TicketAttachment::where('file_path', $path)->first();
+        if (!$attachment) {
+            abort(404);
+        }
+
+        $ticket = $attachment->ticket;
+        if (!$ticket) {
+            abort(404);
+        }
+
+        $user = auth()->user();
+        $isStaff = in_array($user->role, ['admin', 'manager', 'agent']);
+        $isOwner = $ticket->user_id === $user->id;
+
+        if (!$isStaff && !$isOwner) {
+            abort(403, 'Unauthorized. You do not have access to this attachment.');
         }
 
         return response()->download($fullPath);
@@ -438,7 +464,7 @@ class TicketController extends Controller
             ]);
         } catch (\Exception $e) {
             Log::error('Reopen request error: ' . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Error submitting reopen request: ' . $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => 'Error submitting reopen request. Please try again.'], 500);
         }
     }
 
@@ -499,7 +525,7 @@ class TicketController extends Controller
             }
         } catch (\Exception $e) {
             Log::error('Respond to reopen request error: ' . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Error responding to reopen request: ' . $e->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => 'Error responding to reopen request. Please try again.'], 500);
         }
     }
 }

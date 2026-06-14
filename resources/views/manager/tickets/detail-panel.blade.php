@@ -817,6 +817,8 @@
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
 
+    function escapeHtml(str) { if (!str) return ''; const div = document.createElement('div'); div.appendChild(document.createTextNode(str)); return div.innerHTML; }
+
     function createMessageBubble({ author, content, date, isCurrentUser, attachments, userRole }) {
         const alignClass = isCurrentUser ? 'justify-end' : 'justify-start';
         const bubbleClass = isCurrentUser ? 'bg-indigo-600 text-white' : 'bg-white text-gray-900 border border-gray-200';
@@ -849,9 +851,9 @@
         return `
             <div class="flex ${alignClass}">
                 <div class="max-w-md">
-                    <p class="text-xs text-gray-500 mb-1 ${authorClass}">${rolePrefix}${author} • ${date}</p>
+                    <p class="text-xs text-gray-500 mb-1 ${authorClass}">${rolePrefix}${escapeHtml(author)} • ${escapeHtml(date)}</p>
                     <div class="${bubbleClass} rounded-lg px-4 py-3 shadow-sm">
-                        ${showMessage ? `<p class="text-sm whitespace-pre-wrap">${content}</p>` : ''}
+                        ${showMessage ? `<p class="text-sm whitespace-pre-wrap">${escapeHtml(content)}</p>` : ''}
                         ${attachmentsHtml}
                     </div>
                 </div>
@@ -880,14 +882,14 @@
         return `
             <div class="flex ${alignClass} my-4">
                 <div class="max-w-lg">
-                    <p class="text-xs text-gray-500 mb-1 ${authorClass}">${rolePrefix}${author} • ${date}</p>
+                    <p class="text-xs text-gray-500 mb-1 ${authorClass}">${rolePrefix}${escapeHtml(author)} • ${escapeHtml(date)}</p>
                     <div class="bg-orange-50 border-l-4 border-orange-500 rounded-r-lg px-4 py-3 shadow-sm">
                         <div class="flex items-start">
                             <svg class="w-5 h-5 text-orange-500 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                             </svg>
                             <div class="flex-1">
-                                <p class="text-sm text-orange-900">${content}</p>
+                                <p class="text-sm text-orange-900">${escapeHtml(content)}</p>
                             </div>
                         </div>
                     </div>
